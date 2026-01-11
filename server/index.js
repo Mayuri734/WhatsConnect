@@ -8,13 +8,32 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      'http://localhost:8080',
+      'http://localhost:5173',
+      'https://mayuri734.github.io'
+    ],
+    credentials: true
+  })
+);
 app.use(express.json());
 
-// Health check
+// Root health check (IMPORTANT)
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    service: 'WhatsConnect Backend',
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// API health
 app.get('/api/health', (req, res) => {
   res.json({ status: 'Backend running fine 🚀' });
 });
+
 
 // Routes
 app.use('/api/contacts', require('./routes/contacts'));
