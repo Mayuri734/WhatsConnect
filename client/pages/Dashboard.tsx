@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, ReactNode } from "react";
 import { Users, MessageSquare, ArrowDownRight, ArrowUpRight } from "lucide-react";
 import CountUp from "react-countup";
 import Layout from "@/components/Layout";
@@ -184,7 +184,7 @@ function StatCard({
 }: {
   title: string;
   value: number;
-  icon: React.ReactNode;
+icon: ReactNode;
   loading: boolean;
   color: string;
 }) {

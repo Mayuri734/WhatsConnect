@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent } from "react";
+
 import { Search, Plus, Trash2, MessageSquare } from "lucide-react";
 import Layout from "@/components/Layout";
 
@@ -53,8 +54,27 @@ export default function Contacts() {
     }
   };
 
-  const handleAddContact = async (e: React.FormEvent) => {
-    e.preventDefault();
+const handleAddContact = async (e: FormEvent) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch("/api/contacts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...formData,
+        phone: formData.phone.replace(/\D/g, ""),
+      }),
+    });
+
+    if (response.ok) {
+      setFormData({ name: "", phone: "", email: "", company: "", notes: "" });
+      setShowAddModal(false);
+      loadContacts();
+    }
+  } catch (error) {
+    console.error("Error adding contact:", error);
+  }
     try {
       const response = await fetch("/api/contacts", {
         method: "POST",

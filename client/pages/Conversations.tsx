@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, FormEvent } from "react";
 import { Send, MessageCircle, Search, FileText, Zap, StickyNote } from "lucide-react";
 import Layout from "@/components/Layout";
 import { useToast } from "@/hooks/use-toast";
@@ -175,7 +175,8 @@ export default function Conversations() {
     }
   };
 
-  const addNote = async (e: React.FormEvent) => {
+ const addNote = async (e: FormEvent) => {
+
     e.preventDefault();
     if (!selectedConversation) return;
     try {
@@ -213,7 +214,7 @@ export default function Conversations() {
     }
   };
 
-  const handleSendMessage = async (e: React.FormEvent) => {
+const handleSendMessage = async (e: FormEvent) => {
     e.preventDefault();
     if (!messageInput.trim() || !selectedConversation) return;
 
