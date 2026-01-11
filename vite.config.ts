@@ -3,8 +3,8 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 export default defineConfig({
-  base: "/WhatsConnect/", // Required for GitHub Pages deployment
-  
+  base: "/WhatsConnect/",
+
   plugins: [react()],
 
   server: {
@@ -12,7 +12,7 @@ export default defineConfig({
     port: 8080,
     proxy: {
       "/api": {
-        target: "http://localhost:3000", // dev backend
+        target: "http://localhost:3000",
         changeOrigin: true,
         secure: false,
       },
@@ -25,8 +25,7 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./client"),
-     
+      "@": path.resolve("./client"),
     },
   },
 });
